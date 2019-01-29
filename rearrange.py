@@ -20,6 +20,6 @@ length=len(words)
 for i in range(length):
     num = random.randint(0, len(words)-1)
     neworder.append(words[num])
-    words.pop(num)
+    del words[num]
 
 print(*neworder)

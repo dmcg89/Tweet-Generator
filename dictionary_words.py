@@ -6,7 +6,7 @@ word_file = "/usr/share/dict/words"
 words = open(word_file).read().splitlines()
 
 # Generate random integers to serve as the indices for the random words selected from dict
-def randomIntegersList():
+def random_integers_list():
     listOfNumbers = []
     fileWordCount = len(words)
     for x in range (0, sentenceWordCount):
@@ -14,7 +14,7 @@ def randomIntegersList():
     return listOfNumbers
 
 #Use random integers to select random words from dict
-def findRandomWord(listOfNumbers):
+def find_random_word(listOfNumbers):
     sentence = []
     for num in listOfNumbers:
         newRandomWord = words[num]
@@ -22,11 +22,11 @@ def findRandomWord(listOfNumbers):
     return sentence
 
 #Print random words in a sentence
-def printSentence(sentence):
+def print_sentence(sentence):
     print(*sentence,'.')
 
 if __name__ == '__main__':
     sentenceWordCount = int(sys.argv[1])
-    listOfNumbers = randomIntegersList()
-    sentence = findRandomWord(listOfNumbers)
-    printSentence(sentence)
+    listOfNumbers = random_integers_list()
+    sentence = find_random_word(listOfNumbers)
+    print_sentence(sentence)

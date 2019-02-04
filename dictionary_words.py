@@ -4,6 +4,8 @@ import sys
 # Open dictionary
 word_file = "/usr/share/dict/words"
 words = open(word_file).read().splitlines()
+#file.readline() one line at a time (for loop)
+#file.readlines() best practice for this case?
 
 # Generate random integers to serve as the indices for the random words selected from dict
 def random_integers_list():

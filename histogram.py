@@ -1,49 +1,34 @@
-import string
+import re, string
 
-
-word_file = 'text1.txt'
-
-def unique_words():
-    uniqueWordSet = set(wordsFromText)
-    print(len(uniqueWordSet))
-    return (uniqueWordSet)
-
-def frequency(selectWord):
-    frequency = 0
+# takes in list of words from file 'text2.txt' and sets up dictionary to count word frequency
+def histogram(wordsFromText):
+    dict = {}
     for word in wordsFromText:
-        if word == selectWord:
-            frequency += 1
-    # print(frequency)
-    return frequency
+        if word not in dict:
+            dict[word] = 1
+        else:
+            dict[word] += 1
+    return dict
 
-def hist_list_of_lists(uniqueWordSet):
-    histListOfLists = []
-    for word in uniqueWordSet:
-        wordFrequency = frequency(word)
-        histEntry = [word, wordFrequency]
-        histListOfLists.append(histEntry)
-    print(histListOfLists)
+# takes in histogram and returns a count of unique wordsFromText
+def unique_words(histogram):
+    return len(histogram)
 
-def hist_list_of_tuples(uniqueWordSet):
-    histListOfTuples = []
-    wordFrequencyList = []
-    for word in uniqueWordSet:
-        wordFrequency = frequency(word)
-        wordFrequencyList.append(wordFrequency)
-    histListOfTuples = zip(uniqueWordSet, wordFrequencyList)
-    for a, *b in histListOfTuples:
-      print(a, ' '.join(map(str, b)))
-
-
-
+# takes in a word and returns the word count from histogram
+def frequency(word, histogram):
+    if word in histogram:
+        return histogram[word]
+    else:
+        return "Given word is not an element of the histogram."
 
 if __name__ == '__main__':
+    word_file = 'text2.txt'
     text =  open(word_file).read()
 
     # removes punctuation from text and sets all ensures all characters are lower case
     translator = str.maketrans('', '', string.punctuation)
     text = text.lower()
     wordsFromText = (text.translate(translator)).split()
-    uniqueWordSet = unique_words()
-    # hist_list_of_lists(uniqueWordSet)
-    hist_list_of_tuples(uniqueWordSet)
+    uniqueWordSet = sorted(wordsFromText)
+    hist = histogram(uniqueWordSet)
+    print(hist)

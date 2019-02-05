@@ -30,10 +30,12 @@ def weighted_random_select(dict, wordsFromText):
 
 def frequency_test(wordCounts, wordsFromText):
     tempWordList = []
-    for i in range(1000):
+    for i in range(10000):
         selectWord = weighted_random_select(wordCounts, wordsFromText)
         tempWordList.append(selectWord)
     frequencyList = histogram(tempWordList)
+    for key in frequencyList:
+        frequencyList[key] = frequencyList[key]/len(tempWordList)
     print(frequencyList)
 
 

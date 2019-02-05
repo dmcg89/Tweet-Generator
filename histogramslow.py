@@ -27,9 +27,10 @@ def hist_list_of_tuples(uniqueWordSet):
     for word in uniqueWordSet:
         wordFrequency = frequency(word)
         wordFrequencyList.append(wordFrequency)
-    histListOfTuples = zip(uniqueWordSet, wordFrequencyList)
-    for a, *b in histListOfTuples:
-      print(a, ' '.join(map(str, b)))
+    histListOfTuples = list(zip(uniqueWordSet, wordFrequencyList))
+    # for a, *b in histListOfTuples:
+    #   print(a, ' '.join(map(str, b)))
+    print(histListOfTuples)
 
 def hist_dictionary(uniqueWordSet):
     dict = {}
@@ -52,6 +53,6 @@ if __name__ == '__main__':
     wordsFromText = (text.translate(translator)).split()
     uniqueWordSet = sorted(unique_words())
     # frequency('the')
-    hist_list_of_lists(uniqueWordSet)
-    # hist_list_of_tuples(uniqueWordSet)
+    # hist_list_of_lists(uniqueWordSet)
+    hist_list_of_tuples(uniqueWordSet)
     # hist_dictionary(uniqueWordSet)

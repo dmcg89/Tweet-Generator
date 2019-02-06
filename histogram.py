@@ -21,6 +21,39 @@ def frequency(word, histogram):
     else:
         return "Given word is not an element of the histogram."
 
+#       Hist list of tuples implementation
+def hist_list_of_tuples(wordsFromText):
+    list_of_tuples = []
+    inner_tuple = ()
+    for word in wordsFromText:
+        found = False
+        for inner_tuple in list_of_tuples:
+            if word == inner_tuple[0]:
+                count = inner_tuple[1] + 1
+                list_of_tuples.remove(inner_tuple)
+                list_of_tuples.append((word, count))
+                found = True
+                break
+        if not found:
+            list_of_tuples.append((word, 1))
+    print(list_of_tuples)
+
+#   hist list of lists implementation
+
+def hist_list_of_lists(wordsFromText):
+    listsOfLists = []
+    inner_list = []
+    for word in wordsFromText:
+        found = False
+        for innerList in listsOfLists:
+            if word == innerList[0]:
+                found = True
+                innerList[1]+=1
+                break
+        if not found:
+            listsOfLists.append([word, 1])
+    # print(listsOfLists)
+
 if __name__ == '__main__':
     word_file = 'text2.txt'
     text =  open(word_file).read()
@@ -29,6 +62,11 @@ if __name__ == '__main__':
     translator = str.maketrans('', '', string.punctuation)
     text = text.lower()
     wordsFromText = (text.translate(translator)).split()
-    uniqueWordSet = sorted(wordsFromText)
-    hist = histogram(uniqueWordSet)
+
+    # sorts words alphabetically
+    wordsFromText = sorted(wordsFromText)
+    hist = histogram(wordsFromText)
+    
+    # hist = hist_list_of_lists(wordsFromText)
+    # hist = hist_list_of_tuples(wordsFromText)
     print(hist)

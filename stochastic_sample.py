@@ -1,50 +1,54 @@
 import random
 
 text = 'one fish two fish red fish blue fish'
-wordsFromText = text.split()
-# print(wordsFromText)
+word_list = text.split()
+# print(word_list)
 
-def histogram(wordsFromText):
+# builds histogram to be used as input
+def histogram(word_list):
+    """Builds histogram from text input"""
     dict = {}
-    for word in wordsFromText:
+    for word in word_list:
         if word not in dict:
             dict[word] = 1
         else:
             dict[word] += 1
     return dict
 
-wordCounts = histogram(wordsFromText)
-# print(wordCounts)
+hist = histogram(word_list)
+# print(hist)
 
-def weighted_random_select(dict, wordsFromText):
-    randomChoice = random.randint(1, len(wordsFromText))
-    weightsSum = 0
+def weighted_random_select(dict, word_list):
+    """Takes in a histogram and generates a random word with weighted probability"""
+    randomChoice = random.randint(1, len(word_list))
+    weights_sum = 0
     # print(randomChoice)
 
     for key in dict:
-        weightsSum += dict[key]
+        weights_sum += dict[key]
 
-        if randomChoice <= weightsSum:
+        if randomChoice <= weights_sum:
             # print(randomChoice)
-            # print(weightsSum)
+            # print(weights_sum)
             # print(key)
             return key
             exit
 
-def frequency_test(wordCounts, wordsFromText):
-    tempWordList = []
+def frequency_test(hist, word_list):
+    """Takes in the histogram, runs the weighted random selection function on it to generate a list of relative probabilities associated with each word"""
+    temp_word_list = []
     for i in range(100000):
-        selectWord = weighted_random_select(wordCounts, wordsFromText)
-        tempWordList.append(selectWord)
-    frequencyList = histogram(tempWordList)
+        selectWord = weighted_random_select(hist, word_list)
+        temp_word_list.append(selectWord)
+    frequencyList = histogram(temp_word_list)
     for key in frequencyList:
-        frequencyList[key] = frequencyList[key]/len(tempWordList)
+        frequencyList[key] = frequencyList[key]/len(temp_word_list)
         # frequencyList[key] = frequencyList[key]
 
     print(frequencyList)
 
 
 
-frequency_test(wordCounts, wordsFromText)
+frequency_test(hist, word_list)
 
-# weighted_random_select(wordCounts, wordsFromText)
+# weighted_random_select(hist, word_list)

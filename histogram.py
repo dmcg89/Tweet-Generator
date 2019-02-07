@@ -1,16 +1,16 @@
 import re, string
 
 # takes in list of words from file 'text2.txt' and sets up dictionary to count word frequency
-def histogram(wordsFromText):
+def histogram(words_from_text):
     dict = {}
-    for word in wordsFromText:
+    for word in words_from_text:
         if word not in dict:
             dict[word] = 1
         else:
             dict[word] += 1
     return dict
 
-# takes in histogram and returns a count of unique wordsFromText
+# takes in histogram and returns a count of unique words_from_text
 def unique_words(histogram):
     return len(histogram)
 
@@ -22,10 +22,10 @@ def frequency(word, histogram):
         return "Given word is not an element of the histogram."
 
 #       Hist list of tuples implementation
-def hist_list_of_tuples(wordsFromText):
+def hist_list_of_tuples(words_from_text):
     list_of_tuples = []
     inner_tuple = ()
-    for word in wordsFromText:
+    for word in words_from_text:
         found = False
         for inner_tuple in list_of_tuples:
             if word == inner_tuple[0]:
@@ -36,23 +36,25 @@ def hist_list_of_tuples(wordsFromText):
                 break
         if not found:
             list_of_tuples.append((word, 1))
-    print(list_of_tuples)
+    # print(list_of_tuples)
+    return(list_of_tuples)
 
 #   hist list of lists implementation
 
-def hist_list_of_lists(wordsFromText):
-    listsOfLists = []
+def hist_list_of_lists(words_from_text):
+    list_of_lists = []
     inner_list = []
-    for word in wordsFromText:
+    for word in words_from_text:
         found = False
-        for innerList in listsOfLists:
-            if word == innerList[0]:
+        for inner_list in list_of_lists:
+            if word == inner_list[0]:
                 found = True
-                innerList[1]+=1
+                inner_list[1]+=1
                 break
         if not found:
-            listsOfLists.append([word, 1])
-    # print(listsOfLists)
+            list_of_lists.append([word, 1])
+    # print(list_of_lists)
+    return(list_of_lists)
 
 if __name__ == '__main__':
     word_file = 'text2.txt'
@@ -61,12 +63,12 @@ if __name__ == '__main__':
     # removes punctuation from text and sets all ensures all characters are lower case
     translator = str.maketrans('', '', string.punctuation)
     text = text.lower()
-    wordsFromText = (text.translate(translator)).split()
+    words_from_text = (text.translate(translator)).split()
 
     # sorts words alphabetically
-    wordsFromText = sorted(wordsFromText)
-    hist = histogram(wordsFromText)
-    
-    # hist = hist_list_of_lists(wordsFromText)
-    # hist = hist_list_of_tuples(wordsFromText)
+    words_from_text = sorted(words_from_text)
+    # hist = histogram(words_from_text)
+
+    # hist = hist_list_of_lists(words_from_text)
+    hist = hist_list_of_tuples(words_from_text)
     print(hist)

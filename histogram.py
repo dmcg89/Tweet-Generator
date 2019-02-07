@@ -1,6 +1,7 @@
 import re, string
 
 # takes in list of words from file 'text2.txt' and sets up dictionary to count word frequency
+# TODO: turn above comment into triple quote docstring
 def histogram(words_from_text):
     dict = {}
     for word in words_from_text:
@@ -59,6 +60,7 @@ def hist_list_of_lists(words_from_text):
 if __name__ == '__main__':
     word_file = 'text2.txt'
     text =  open(word_file).read()
+    # TODO: open with with instead of open()
 
     # removes punctuation from text and sets all ensures all characters are lower case
     translator = str.maketrans('', '', string.punctuation)
@@ -69,6 +71,6 @@ if __name__ == '__main__':
     words_from_text = sorted(words_from_text)
     # hist = histogram(words_from_text)
 
-    # hist = hist_list_of_lists(words_from_text)
-    hist = hist_list_of_tuples(words_from_text)
+    hist = hist_list_of_lists(words_from_text)
+    # hist = hist_list_of_tuples(words_from_text)
     print(hist)

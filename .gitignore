@@ -8,3 +8,4 @@ __pycache__
 histogram.pyc
 ENV
 listogram.pyc
+*.pyc

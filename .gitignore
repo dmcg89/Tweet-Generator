@@ -6,3 +6,5 @@ dictogram.pyc
 __pycache__
 .pytest_cache
 histogram.pyc
+ENV
+listogram.pyc

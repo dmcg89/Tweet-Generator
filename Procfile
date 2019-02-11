@@ -1,1 +1,1 @@
-web: gunicorn -w 1 __init__:app
+web: gunicorn -w 1 tweetgen:app

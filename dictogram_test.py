@@ -54,11 +54,12 @@ class DictogramTest(unittest.TestCase):
         histogram.add_count('food', 5)
         # Verify updated frequency count of all words
         assert histogram.frequency('one') == 1
-        assert histogram.frequency('two') == 2
+        assert histogram.frequency('two') == 3
         assert histogram.frequency('red') == 1
         assert histogram.frequency('blue') == 4
         assert histogram.frequency('fish') == 8
         assert histogram.frequency('food') == 5
+        print(histogram.types)
         # Verify count of distinct word types
         assert histogram.types == 6
         # Verify total count of all word tokens

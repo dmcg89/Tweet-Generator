@@ -2,6 +2,7 @@ from app import app
 from histogram import histogram
 from stochastic_sample import weighted_random_select
 import re, string
+from flask import Flask, jsonify, render_template
 
 @app.route('/')
 @app.route('/index')
@@ -19,9 +20,6 @@ def index():
         select_word = weighted_random_select(hist, words_from_text)
         sentence.append(select_word)
     print(sentence)
-    new_sentence = " ".join(sentence)
-    print(new_sentence)
+    words = " ".join(sentence)
 
-
-
-    return new_sentence
+    return render_template("base.html", title='Home Page',words=words)

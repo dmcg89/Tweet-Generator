@@ -1,5 +1,4 @@
-#!/Users/drew/dev/courses/cs12/tweetgenerator/tweet-generator/venv/bin/python3
-
+#!/Users/drew/dev/courses/cs12/tweetgenerator/tweet-generator/venv/bin/python2.7
 # -*- coding: utf-8 -*-
 import re
 import sys

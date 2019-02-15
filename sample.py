@@ -17,9 +17,9 @@ def histogram(word_list):
 hist = histogram(word_list)
 # print(hist)
 
-def weighted_random_select(dict, word_list):
+def weighted_random_select(dict):
     """Takes in a histogram and generates a random word with weighted probability"""
-    random_choice = random.randint(1, len(word_list))
+    random_choice = random.randint(1, sum(dict.values()))
     weights_sum = 0
     # print(random_choice)
 
@@ -27,9 +27,6 @@ def weighted_random_select(dict, word_list):
         weights_sum += dict[key]
 
         if random_choice <= weights_sum:
-            # print(random_choice)
-            # print(weights_sum)
-            # print(key)
             return key
             exit
 
@@ -48,6 +45,6 @@ def frequency_test(hist, word_list):
 
 
 
-frequency_test(hist, word_list)
+# frequency_test(hist, word_list)
 
 # weighted_random_select(hist, word_list)

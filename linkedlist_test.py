@@ -139,6 +139,8 @@ class LinkedListTest(unittest.TestCase):
 
     def test_find(self):
         ll = LinkedList(['A', 'B', 'C'])
+        thing = (lambda item: item == 'B')
+        print(thing)
         assert ll.find(lambda item: item == 'B') == 'B'  # Match equality
         assert ll.find(lambda item: item < 'B') == 'A'  # Match less than
         assert ll.find(lambda item: item > 'B') == 'C'  # Match greater than

@@ -79,26 +79,32 @@ class LinkedList(object):
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        # Create new node to hold given item
         new_node = Node(item)
+        # Prepend node before head, if it exists
         new_node.next = self.head
         self.head = new_node
+        if self.length() == 1:
+            self.tail = new_node
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find item where quality(item) is True
+        # Loop through all nodes to find item where quality(item) is True
         node = self.head
         while node is not None:
-            if node.data == quality:
-                print('found')
-                return node
+            # Check if node's data satisfies given quality function
+            if quality(node.data) is True:
+                return node.data
             else:
                 node = node.next
 
-        # TODO: Check if node's data satisfies given quality function
+
+        # value wasnt in list, return nothing
+        return None
+
+
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.

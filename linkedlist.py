@@ -19,6 +19,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.size = 0   # Length
         # Append given items
         if items is not None:
             for item in items:
@@ -56,12 +57,13 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
-        count = 0
-        current_node = self.head
-        while current_node is not None:
-            count += 1
-            current_node = current_node.next
-        return count
+        # count = 0
+        # current_node = self.head
+        # while current_node is not None:
+        #     count += 1
+        #     current_node = current_node.next
+        # return count
+        return self.size
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -69,12 +71,15 @@ class LinkedList(object):
         # TODO: Create new node to hold given item
         new_node = Node(item)
         # TODO: Append node after tail, if it exists
-        if self.length() > 0:
+        if self.size > 0:
             (self.tail).next = new_node
             self.tail = new_node
+            self.size += 1
         else:
             self.tail = new_node
             self.head = new_node
+            self.size += 1
+
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -82,10 +87,21 @@ class LinkedList(object):
         # Create new node to hold given item
         new_node = Node(item)
         # Prepend node before head, if it exists
-        new_node.next = self.head
-        self.head = new_node
-        if self.length() == 1:
+        if self.size == 0:
+            self.head = new_node
             self.tail = new_node
+            self.size += 1
+
+        else:
+            new_node.next = self.head
+            self.head = new_node
+            self.size += 1
+
+        # new_node.next = self.head
+        # self.head = new_node
+        # if self.size == 1:
+        #     self.tail = new_node
+        # self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -100,7 +116,6 @@ class LinkedList(object):
             else:
                 node = node.next
 
-
         # value wasnt in list, return nothing
         return None
 
@@ -111,23 +126,55 @@ class LinkedList(object):
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
-        target = self.find(item)
-        if target == None:
-                print('delete item not found')
-                raise ValueError('item not found: {}'.format(item))
+        if self.is_empty():
+            raise ValueError("LinkedList is Empty")
 
-        print(target)
-        node = self.head
-        prev_node = self.head
-        while node is not None:
-            if target == node:
-                prev_node.next = node.next
-                break
-                # print(node)
-                # print(prev_node)
+        if self.size == 1:
+            self.head = None
+            self.tail = None
+            self.size -= 1
+            return True
+
+        current_node = self.head
+        prev_node = None
+
+        while current_node:
+            if current_node.data == item:
+                if current_node == self.tail:
+                    prev_node.next = None
+                    self.tail = prev_node
+                    self.size -= 1
+                    return
+                if prev_node:
+                    prev_node.next = current_node.next
+                    self.size -= 1
+                else:
+                    self.head = current_node.next
+                    self.size -= 1
+                return
+
             else:
-                prev_node = node
-                node = node.next
+                prev_node = current_node
+                current_node = current_node.next
+
+        raise ValueError('Item not found: {}'.format(item))
+        # target = self.find(item)
+        # if target == None:
+        #         print('delete item not found')
+        #         raise ValueError('item not found: {}'.format(item))
+        #
+        # print(target)
+        # node = self.head
+        # prev_node = self.head
+        # while node is not None:
+        #     if target == node:
+        #         prev_node.next = node.next
+        #         break
+        #         # print(node)
+        #         # print(prev_node)
+        #     else:
+        #         prev_node = node
+        #         node = node.next
 
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed

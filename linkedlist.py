@@ -83,7 +83,7 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(1) Why and under what conditions?"""
         # Create new node to hold given item
         new_node = Node(item)
         # Prepend node before head, if it exists
@@ -105,8 +105,8 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) Why and under what conditions? item in First part of list
+        Worst case running time: O(n) Why and under what conditions? item in end of list"""
         # Loop through all nodes to find item where quality(item) is True
         node = self.head
         while node is not None:
@@ -123,8 +123,8 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        TODO: Best case running time: O(1) Why and under what conditions?
+        TODO: Worst case running time: O(n) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
         if self.is_empty():
             raise ValueError("LinkedList is Empty")

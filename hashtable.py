@@ -26,7 +26,8 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n^2) Why and under what conditions?  O(n^2) in all cases since it
+        iterates entirely every time"""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -36,7 +37,7 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n^2) Why and under what conditions?  Same logic as before"""
         # bucket_values = []
         all_values = []
         # Loop through all buckets
@@ -48,7 +49,7 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) Why and under what conditions?  Loops through all buckets once"""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -57,7 +58,8 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(n) Why and under what conditions?  Loops through all
+        buckets once"""
         # Loop through all buckets
         length = 0
         for bucket in self.buckets:
@@ -67,7 +69,8 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) or O(n) Why and under what conditions?  Depends on where
+        the desired key is located.  See find logic"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -83,7 +86,8 @@ class HashTable(object):
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) or O(n) Why and under what conditions?  Same logic as
+        above function"""
         # Find bucket where given key belongs
         # bucket = self.buckets[self._bucket_index(key)]
         index = self._bucket_index(key)
@@ -92,25 +96,28 @@ class HashTable(object):
         entry = bucket.find(lambda key_value: key_value[0] == key)
         # If found, return value associated with given key
         if entry is not None:   # Found
-            return entry[1]    # Get value only at index 1
+            return entry[1]    # Get value at index 1
         # Otherwise, raise error to tell user get failed
         else:
             raise KeyError('Key not found: {}'.format(key))
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(???) Why and under what conditions? uses _bucket_index"""
+        Running time: O(1) or O(n) Why and under what conditions? Best case O(1)
+        item is located near head of list.  Otherwise O(l) (find) + O(l) (delete) = O(2*l)
+        simplifies to O(l) if item is near tail of list"""
         # Find bucket where given key belongs (first two lines on almost every step)
-        index = self._bucket_index(key)
-        bucket = self.buckets[index]
+        index = self._bucket_index(key)  # O(1)
+        bucket = self.buckets[index]     # O(1)
         # Check if key-value entry exists in bucket
-        entry = bucket.find(lambda key_value: key_value[0] == key)
+        entry = bucket.find(lambda key_value: key_value[0] == key)  # O(l) worst case
         # If found, update value associated with given key
         if entry is not None:   # found
-            bucket.delete(entry)
+            bucket.delete(entry)    # O(l) worst case
+
         # Otherwise, insert given key-value entry into bucket
-        entry = (key, value)
-        bucket.append(entry)
+        entry = (key, value)    # O(1)
+        bucket.append(entry)    # O(1)
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -123,7 +130,7 @@ class HashTable(object):
         # If found, delete entry associated with given key
         if entry is not None: # found
             bucket.delete(entry)
-        # TODO: Otherwise, raise error to tell user delete failed
+        # Otherwise, raise error to tell user delete failed
         else:
             raise KeyError('Key not found: {}'.format(key))
 

@@ -103,8 +103,9 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        Running time: O(1) or O(n) Why and under what conditions? Best case O(1)
-        item is located near head of list.  Otherwise O(l) (find) + O(l) (delete) = O(2*l)
+        Running time: O(1) or O(l) (l being average length of buckets).
+        Why and under what conditions?
+        Best case O(1) item is located near head of list.  Otherwise O(l) (find) + O(l) (delete) = O(2*l)
         simplifies to O(l) if item is near tail of list"""
         # Find bucket where given key belongs (first two lines on almost every step)
         index = self._bucket_index(key)  # O(1)
@@ -114,14 +115,14 @@ class HashTable(object):
         # If found, update value associated with given key
         if entry is not None:   # found
             bucket.delete(entry)    # O(l) worst case
-
         # Otherwise, insert given key-value entry into bucket
         entry = (key, value)    # O(1)
         bucket.append(entry)    # O(1)
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: Best case O(1) if item is near head of list or O(n)
+        if item is near tail of list."""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]

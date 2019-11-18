@@ -3,9 +3,10 @@ import sys
 
 # Open dictionary
 word_file = "/usr/share/dict/words"
-words = open(word_file).read().splitlines()
+# words = open(word_file).read().splitlines()
 #file.readline() one line at a time (for loop)
 #file.readlines() best practice for this case?
+words = ['katie', 'robin', 'trout', 'drew', 'ben']
 
 # Generate random integers to serve as the indices for the random words selected from dict
 def random_integers_list():
@@ -13,6 +14,7 @@ def random_integers_list():
     fileWordCount = len(words)
     for x in range (0, sentenceWordCount):
         listOfNumbers.append(random.randint(0, fileWordCount - 1))
+        print(listOfNumbers)
     return listOfNumbers
 
 #Use random integers to select random words from dict

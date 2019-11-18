@@ -28,7 +28,6 @@ class Dictogram(dict):
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
-        # TODO: Retrieve word frequency count
         if word not in self:
             word_frequency = 0
         else:
@@ -66,11 +65,6 @@ def main():
         woodchuck_text = ('how much wood would a wood chuck chuck'
                           ' if a wood chuck could chuck wood')
         print_histogram(woodchuck_text.split())
-
-# hist = Dictogram()
-# hist.addcount("fish") == Dictogram.add_count(hist, "fish")
-
-
 
 if __name__ == '__main__':
     main()

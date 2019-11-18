@@ -1,7 +1,7 @@
 import random
 
-text = 'one fish two fish red fish blue fish'
-word_list = text.split()
+# text = 'one fish two fish red fish blue fish'
+# word_list = text.split()
 # print(word_list)
 
 def histogram(word_list):
@@ -14,19 +14,19 @@ def histogram(word_list):
             dict[word] += 1
     return dict
 
-hist = histogram(word_list)
-print(hist)
+# hist = histogram(word_list)
+# print(hist)
 
 def weighted_random_select(dict):
     """Takes in a histogram and generates a random word with weighted probability"""
     random_choice = random.randint(1, sum(dict.values()))
     weights_sum = 0
-    print(random_choice)
+    # print(random_choice)
 
     for key in dict:
         weights_sum += dict[key]
-        print(key, dict[key])
-        print(weights_sum)
+        # print(key, dict[key])
+        # print(weights_sum)
 
         if random_choice <= weights_sum:
             return key
@@ -43,10 +43,10 @@ def frequency_test(hist, word_list):
         frequency_list[key] = frequency_list[key]/len(temp_word_list)
         # frequency_list[key] = frequency_list[key]
 
-    print(frequency_list)
+    # print(frequency_list)
 
 
 
 # frequency_test(hist, word_list)
 
-weighted_random_select(hist)
+# weighted_random_select(hist)
